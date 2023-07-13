@@ -219,7 +219,7 @@ void USART1_IRQHandler(void)
 }
 
 /* USER CODE BEGIN 1 */
-__weak void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
     /* Prevent unused argument(s) compilation warning */
     HAL_GPIO_TogglePin(GPIOF, GPIO_PIN_10);
