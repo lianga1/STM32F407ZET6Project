@@ -23,7 +23,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include <stdio.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -55,6 +55,8 @@ void SystemClock_Config(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 void Usart_SendString(uint8_t *str);
+int fputc(int ch,FILE* f);
+int fgetc(FILE* f);
 /* USER CODE END 0 */
 
 /**
@@ -171,6 +173,21 @@ void Usart_SendString(uint8_t *str){
         HAL_UART_Transmit(&huart1,(uint8_t *)(str + k),1,1000);
         k++;
     }while(*(str+k)!='\0');
+}
+
+int fputc(int ch, FILE *f)
+{
+    HAL_UART_Transmit(&huart1,(uint8_t *)&ch,1,1000);
+    return ch;
+}
+int fgetc(FILE *f)
+{
+    int ch=0;
+    while (__HAL_UART_GET_FLAG(&huart1,UART_FLAG_RXNE)==RESET);
+
+    HAL_UART_Receive(&huart1,(uint8_t *)&ch,1,1000);
+    
+    return ch;
 }
 /* USER CODE END 4 */
 
