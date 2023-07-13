@@ -111,8 +111,6 @@ int main(void)
 //              HAL_GPIO_WritePin(GPIOF,LED0_Pin_Pin|LED1_Pin_Pin,LEDState);
 //          }
 //      }
-      Usart_SendString((uint8_t *)"Hello\n");
-        HAL_Delay(1000);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
