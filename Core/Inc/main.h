@@ -63,8 +63,6 @@ void Error_Handler(void);
 #define LED0_Pin_GPIO_Port GPIOF
 #define LED1_Pin_Pin GPIO_PIN_10
 #define LED1_Pin_GPIO_Port GPIOF
-#define ButtonA8_Pin GPIO_PIN_8
-#define ButtonA8_GPIO_Port GPIOA
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
