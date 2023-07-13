@@ -54,7 +54,7 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+void Usart_SendString(uint8_t *str);
 /* USER CODE END 0 */
 
 /**
@@ -109,7 +109,8 @@ int main(void)
 //              HAL_GPIO_WritePin(GPIOF,LED0_Pin_Pin|LED1_Pin_Pin,LEDState);
 //          }
 //      }
-
+      Usart_SendString((uint8_t *)"Hello\n");
+        HAL_Delay(1000);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -164,6 +165,13 @@ void SystemClock_Config(void)
 
 /* USER CODE BEGIN 4 */
 
+void Usart_SendString(uint8_t *str){
+    unsigned int k=0;
+    do{
+        HAL_UART_Transmit(&huart1,(uint8_t *)(str + k),1,1000);
+        k++;
+    }while(*(str+k)!='\0');
+}
 /* USER CODE END 4 */
 
 /**
