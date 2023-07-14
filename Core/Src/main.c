@@ -43,7 +43,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+extern uint16_t LEDLight;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -94,7 +94,9 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    __HAL_TIM_SetCompare(&htim3,TIM_CHANNEL_1,500);
+    __HAL_TIM_SetCompare(&htim3,TIM_CHANNEL_1,LEDLight);
+    HAL_Delay(10);
+
 //      int LEDState = GPIO_PIN_RESET;
 //      HAL_GPIO_WritePin(GPIOF,LED0_Pin_Pin|LED1_Pin_Pin,LEDState);
 //      int ButtonState=0;
