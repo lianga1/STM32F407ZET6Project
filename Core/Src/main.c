@@ -18,7 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "usart.h"
+#include "tim.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -54,9 +54,7 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-void Usart_SendString(uint8_t *str);
-int fputc(int ch,FILE* f);
-int fgetc(FILE* f);
+
 /* USER CODE END 0 */
 
 /**
@@ -87,7 +85,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_USART1_UART_Init();
+  MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
@@ -96,7 +94,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-
+    __HAL_TIM_SetCompare(&htim3,TIM_CHANNEL_1,500);
 //      int LEDState = GPIO_PIN_RESET;
 //      HAL_GPIO_WritePin(GPIOF,LED0_Pin_Pin|LED1_Pin_Pin,LEDState);
 //      int ButtonState=0;
@@ -165,28 +163,7 @@ void SystemClock_Config(void)
 
 /* USER CODE BEGIN 4 */
 
-void Usart_SendString(uint8_t *str){
-    unsigned int k=0;
-    do{
-        HAL_UART_Transmit(&huart1,(uint8_t *)(str + k),1,1000);
-        k++;
-    }while(*(str+k)!='\0');
-}
 
-int fputc(int ch, FILE *f)
-{
-    HAL_UART_Transmit(&huart1,(uint8_t *)&ch,1,1000);
-    return ch;
-}
-int fgetc(FILE *f)
-{
-    int ch=0;
-    while (__HAL_UART_GET_FLAG(&huart1,UART_FLAG_RXNE)==RESET);
-
-    HAL_UART_Receive(&huart1,(uint8_t *)&ch,1,1000);
-    
-    return ch;
-}
 /* USER CODE END 4 */
 
 /**
